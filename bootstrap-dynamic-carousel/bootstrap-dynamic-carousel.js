@@ -4,7 +4,7 @@
  * Copyright 2015 Jayr Alencar (http://jayralencar.com.br)
  * Licensed under the The MIT License (MIT) (https://github.com/JayrAlencar/bootstrap-dynamic-tabs/blob/master/LICENSE)
  */
-(function ( $ ) {
+ (function ( $ ) {
 
 	//YOUTUBE
 	var player;
@@ -13,11 +13,11 @@
 	var firstScriptTag = document.getElementsByTagName('script')[0];
 	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-	//VIMEO
-	// var tag = document.createElement('script');
-	// tag.src = "https://f.vimeocdn.com/js/froogaloop2.min.js";
-	// var firstScriptTag = document.getElementsByTagName('script')[0];
-	// firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	// VIMEO
+	var tag = document.createElement('script');
+	tag.src = "http://f.vimeocdn.com/js/froogaloop2.min.js";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 
 
@@ -83,10 +83,11 @@
 		this.on('slid.bs.carousel', function(){
 			var e = jQuery.Event( "slided" );
 			myCarousel.find('.carousel-inner').find('.active').trigger(e)
-		})
-
-
-
+		});
+		this.on('slide.bs.carousel', function(){
+			var ev = jQuery.Event( "sliding" );
+			myCarousel.find('.carousel-inner').find('.active').trigger(ev)
+		});
 		return this;
 	};
 
@@ -142,9 +143,15 @@
 
 			var item = $('<div/>',{
 				class: 'item',
-				id: videoId,
 				type: settings.type
-			}).on('slided', function(){
+			});
+
+			item.on('sliding', function(){
+				player.destroy()
+			});
+			
+			item.on('slided', function(){
+				var divVideo = $('<div/>',{id: videoId}).appendTo(item)
 				player = new YT.Player(videoId, {
 					width: width,
 					height: height,
@@ -163,15 +170,16 @@
 					}
 				});
 			})
+			
 		}
 
-		// /. YOUTUBE
 
 		//VIMEO
 		if(settings.type == 'vimeo'){
 			var parts = settings.url.split('/');
 			var videoId = parts.pop();
 			var myCarousel = this;
+			var playerV;
 
 			var iframe = $('<iframe/>',{
 				id: videoId,
@@ -184,23 +192,24 @@
 				allowfullscreen: true
 			});
 
-
 			var item = $('<div/>',{
 				class: 'item',
 				type: settings.type
-			}).append(iframe).on('slided', function(){
-				myCarousel.carousel('pause')
-				$.getScript('https://f.vimeocdn.com/js/froogaloop2.min.js', function(data, textStatus, jqxhr){
-					var player = $f(iframe);
-					player.addEvent('ready', function(){
-						player.play();
-						player.addEvent('playProgress', function(data, id){
-							alert(id)
-						});
-					});
-				})
-				
 			});
+			item.on('slided', function(){
+				myCarousel.carousel('pause')
+				item.append(iframe)
+				playerV = $f(iframe[0]);
+				playerV.addEvent('ready', function(){
+					playerV.api('play');
+					playerV.addEvent('finish', function(id){
+						myCarousel.carousel('next').carousel('cycle');
+					});
+				});
+			});
+			item.on('sliding', function(){
+				iframe.remove();
+			})
 
 		}
 
