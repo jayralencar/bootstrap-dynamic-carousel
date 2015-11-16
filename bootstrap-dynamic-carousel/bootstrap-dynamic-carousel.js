@@ -1,5 +1,5 @@
 /*!
- * Bootstrap Dynamic Carousel v0.0. (https://github.com/JayrAlencar/bootstrap-dynamic-carousel)
+ * Bootstrap Dynamic Carousel v1.0.0 (https://github.com/JayrAlencar/bootstrap-dynamic-carousel)
  *
  * Copyright 2015 Jayr Alencar (http://jayralencar.com.br)
  * Licensed under the The MIT License (MIT) (https://github.com/JayrAlencar/bootstrap-dynamic-tabs/blob/master/LICENSE)
@@ -119,6 +119,10 @@
 				type: settings.type
 			}).append(a);
 
+			if(settings.id){
+				item.attr('id', settings.id);
+			}
+
 			if(settings.active){
 				this.find('.carousel-inner').find('.active').removeClass('active');
 				item.addClass('active')
@@ -145,6 +149,10 @@
 				class: 'item',
 				type: settings.type
 			});
+
+			if(settings.id){
+				item.attr('id', settings.id);
+			}
 
 			item.on('sliding', function(){
 				player.destroy()
@@ -196,6 +204,11 @@
 				class: 'item',
 				type: settings.type
 			});
+
+			if(settings.id){
+				item.attr('id', settings.id);
+			}
+
 			item.on('slided', function(){
 				myCarousel.carousel('pause')
 				item.append(iframe)
