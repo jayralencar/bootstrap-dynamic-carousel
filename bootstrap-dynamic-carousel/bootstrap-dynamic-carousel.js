@@ -1,5 +1,5 @@
 /*!
- * Bootstrap Dynamic Carousel v1.0.0 (https://github.com/JayrAlencar/bootstrap-dynamic-carousel)
+ * Bootstrap Dynamic Carousel v1.1.0 (https://github.com/JayrAlencar/bootstrap-dynamic-carousel)
  *
  * Copyright 2015 Jayr Alencar (http://jayralencar.com.br)
  * Licensed under the The MIT License (MIT) (https://github.com/JayrAlencar/bootstrap-dynamic-tabs/blob/master/LICENSE)
@@ -242,6 +242,14 @@
 
 		this.find('.carousel-inner').append(item);
 
+	}
+
+	$.fn.removeById = function(id){
+		var element = this.find('.carousel-inner').find('#'+id);
+		if(element.hasClass('active')){
+			this.carousel('next');
+		}
+		element.remove();
 	}
 
 	function gup( name, url ) {
