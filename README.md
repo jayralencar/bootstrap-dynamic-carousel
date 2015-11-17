@@ -1,6 +1,8 @@
 # bootstrap-dynamic-carousel
 Add item with image or video (youtube or vimeo), remove item by id, etc
 <hr/>
+<h3><a href="http://jayralencar.com.br/exemplos/bootstrap-dynamic-carousel/">DEMO</a></h3>
+<hr/>
 Como o nome e a pequena descrição acima já dizem, este plugin serve para manipular o carousel do Bootstrap de forma dinâmica, além de possibilitar a execução de vídeos do Youtube ou do Vimeo. Quando o slide onde está o vídeo aparece o vídeo inicia automaticamente, e no fim dele o slide passa sozinho.
 <hr/>
 <h2>Usando</h2>
