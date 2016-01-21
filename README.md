@@ -7,13 +7,11 @@ Como o nome e a pequena descrição acima já dizem, este plugin serve para mani
 <hr/>
 <h2>Usando</h2>
 Primeiro você precisa incluir a biblioteca <a href="http://jquery.com/" targer="_blank">jQuery</a>, e o <a href="//getbootstrap.com">Bootstrap</a>, e depois o arquivo <code>bootstrap-dynamic-carousel.js</code>.
-<pre>
-<code>
-  	var slide = $('#carousel').bootstrapDynamicCarousel({
-  		indicators: false
-  	});
-</code>
-</pre>
+```js
+var slide = $('#carousel').bootstrapDynamicCarousel({
+	indicators: false
+});
+```
 
 A biblioteca aceita alguns parametros na sua instancia, são eles:
 <table>
@@ -92,41 +90,37 @@ Este método serve para adicionar um novo item ao carousel, como o nome sugere. 
   </tbody>
 </table>
 Veja abaixo exemplos de como adicionar items:
-<pre>
-  <code>
-  //Criando elemento
-  var slide = $('#carousel').bootstrapDynamicCarousel({
-		indicators: false
-	});
+```js
+//Criando elemento
+var slide = $('#carousel').bootstrapDynamicCarousel({
+	indicators: false
+});
+
+//Adicionando imagens
+slide.addItem({
+	id: 'myID',
+	type: 'image',
+	url: 'http://clubedosgeeks.com.br/wp-content/uploads/2015/11/dynamic.fw_-1270x7931-720x340.png',
+	href: 'http://clubedosgeeks.com.br/web-design/jquery/abas-dinamicas-com-boostrap-abrir-fechar-e-arrastar',
+	caption: 'Plugin to add, remove and move Bootstrap tabs',
+	captionTag: 'h3',
+	active: true
+});
 	
-	//Adicionando imagens
-	slide.addItem({
-		id: 'myID',
-		type: 'image',
-		url: 'http://clubedosgeeks.com.br/wp-content/uploads/2015/11/dynamic.fw_-1270x7931-720x340.png',
-		href: 'http://clubedosgeeks.com.br/web-design/jquery/abas-dinamicas-com-boostrap-abrir-fechar-e-arrastar',
-		caption: 'Plugin to add, remove and move Bootstrap tabs',
-		captionTag: 'h3',
-		active: true
-	});
+//Adicionando vídeo do youtube
+slide.addItem({
+	type: 'youtube',
+	url: 'https://www.youtube.com/watch?v=uWPMevZbn-s'
+});
 	
-	//Adicionando vídeo do youtube
-	slide.addItem({
-		type: 'youtube',
-		url: 'https://www.youtube.com/watch?v=uWPMevZbn-s'
-	});
-	
-	//adicionando vídeo do VIMEO
-	slide.addItem({
-		type: 'vimeo',
-		url: 'https://vimeo.com/76979871'
-	});
-  </code>
-</pre>
+//adicionando vídeo do VIMEO
+slide.addItem({
+	type: 'vimeo',
+	url: 'https://vimeo.com/76979871'
+});
+```
 <h3>removeById(itemid)</h3>
 Método para remover itens do carousel pelo id do item, para usar este método é importante informar o id do item ao adicionar. Veja a forma de usar:
-<pre>
-  <code>
+```js
     slide.removeById('myID');
-  </code>
-</pre>
+```
